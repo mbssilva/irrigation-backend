@@ -1,22 +1,37 @@
-import { Schema } from "mongoose";
+import { Schema, Document, model } from "mongoose";
 
-interface IMoisture {
+interface IMoisture extends Document {
   sensorId: string;
   value: number;
   timestamp: Date;
 }
 
-export const moistureSchema = new Schema<IMoisture>({
-  sensorId: {
-    type: String,
-    required: true,
+const MoistureSchema = new Schema<IMoisture>(
+  {
+    sensorId: {
+      type: String,
+      required: true,
+    },
+    value: {
+      type: Number,
+      required: true,
+    },
+    timestamp: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  value: {
-    type: Number,
-    required: true,
-  },
-  timestamp: {
-    type: Date,
-    default: Date.now,
+  {
+    timestamps: true,
+  }
+);
+
+MoistureSchema.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
+  transform: (_, ret) => {
+    delete ret._id;
   },
 });
+
+export const Moisture = model("Moisture", MoistureSchema);
