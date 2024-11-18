@@ -1,18 +1,27 @@
+import { v4 as uuidv4 } from "uuid";
 import { Request, Response } from "express";
 import { Moisture } from "../../resources/database/schemas/moisture";
+import { Sensor } from "../../resources/database/schemas/sensor";
 
 class MoistureController {
   async save(req: Request, res: Response) {
     try {
-      const { moistureLevel } = req.body;
+      res.status(201).send();
+      const { moistureLevel, sensorId } = req.body;
+
+      const sensor = await Sensor.findById(sensorId).catch(console.error);
+
+      if (!sensor) {
+        console.error(`SensorId ${sensorId} não encontrado.`);
+        return;
+      }
 
       const newMoisture = new Moisture({
-        sensorId: "1",
+        sensorId,
         value: Number(moistureLevel),
       });
 
       newMoisture.save().catch(console.error);
-      return res.status(201).send();
     } catch (error) {
       console.error(error);
       return res.status(500).send({ message: error.message });

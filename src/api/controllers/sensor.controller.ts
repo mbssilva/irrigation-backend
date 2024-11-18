@@ -22,7 +22,7 @@ class SensorController {
 
   async show(req: Request, res: Response) {
     try {
-      const recentMoistures = await Sensor.find({ id: req.params.id });
+      const recentMoistures = await Sensor.findById(req.params.id);
 
       res.status(200).send(recentMoistures);
     } catch (error) {

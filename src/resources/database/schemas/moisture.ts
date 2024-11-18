@@ -10,6 +10,7 @@ const MoistureSchema = new Schema<IMoisture>(
   {
     sensorId: {
       type: String,
+      ref: "Sensor",
       required: true,
     },
     value: {
