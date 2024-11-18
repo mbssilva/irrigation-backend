@@ -9,7 +9,7 @@
     "dev": "tsnd --inspect --transpile-only --ignore-watch node_modules -r dotenv/config --respawn src/server/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matheus Bernardi da Silva",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.15.0",
