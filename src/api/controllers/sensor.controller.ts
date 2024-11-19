@@ -12,11 +12,11 @@ class SensorController {
         longitude: Number(longitude),
       });
 
-      newSensor.save().catch(console.error);
+      await newSensor.save();
       return res.status(201).send();
     } catch (error) {
       console.error(error);
-      return res.status(500).send({ message: error.message });
+      return res.status(400).send({ message: error.message });
     }
   }
 
