@@ -1,7 +1,7 @@
 import { Schema, Document, model } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 
 interface ISensor extends Document {
+  id: string;
   description: string;
   location: {
     type: string;
@@ -13,7 +13,7 @@ const SensorSchema = new Schema<ISensor>(
   {
     _id: {
       type: String,
-      default: uuidv4,
+      required: true
     },
     description: {
       type: String,
@@ -23,7 +23,8 @@ const SensorSchema = new Schema<ISensor>(
       type: {
         type: String,
         enum: ["Point"],
-        required: true,
+        default: "Point",
+        required: false,
       },
       coordinates: {
         type: [Number],
