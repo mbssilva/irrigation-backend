@@ -42,7 +42,7 @@ class SensorController {
       const settings = await Setting.findOne();
   
       if (!settings || !settings.actionMode) {
-        return res.status(500).send("");
+        return res.status(204).send("");
       }
   
       const orders: string[] = [];

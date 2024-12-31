@@ -9,6 +9,7 @@ type Input = {
 export async function handleRegisterMoisture(data: Input): Promise<void> {
   try {
     const { moistureLevel, sensorId } = data;
+    console.log(`handleRegisterMoisture :: sensorId: ${sensorId}, moistureLevel: ${moistureLevel}`);
     const sensor = await Sensor.findById(sensorId).catch(console.error);
 
     if (!sensor) {
