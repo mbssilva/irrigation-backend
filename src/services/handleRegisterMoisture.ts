@@ -12,6 +12,8 @@ export async function handleRegisterMoisture(data: Input): Promise<void> {
     console.log(`handleRegisterMoisture :: sensorId: ${sensorId}, moistureLevel: ${moistureLevel}`);
     const sensor = await Sensor.findById(sensorId).catch(console.error);
 
+    const parsedMoistureLevel = 1.0966 * Math.exp((-10.02 * moistureLevel) / 4095);
+
     if (!sensor) {
       console.error(`SensorId ${sensorId} não encontrado.`);
       return;
@@ -19,7 +21,7 @@ export async function handleRegisterMoisture(data: Input): Promise<void> {
 
     const newMoisture = new Moisture({
       sensorId,
-      value: Number(moistureLevel),
+      value: Number(parsedMoistureLevel),
     });
 
     await newMoisture.save();

@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { subHours } from "date-fns";
 import { Moisture } from "../../resources/database/schemas/moisture";
 import { eventEmitter } from "../../resources/events/eventEmitter";
 
 class MoistureController {
   async save(req: Request, res: Response) {
     try {
-      eventEmitter.publish('HANDLE_REGISTER_MOISTURE', req.body);
+      eventEmitter.publish("HANDLE_REGISTER_MOISTURE", req.body);
       res.status(201).send();
     } catch (error) {
       console.error(error);
@@ -15,12 +16,11 @@ class MoistureController {
 
   async index(req: Request, res: Response) {
     try {
-      const { hours } = req.query;
-
-      const initialTS = new Date();
-      initialTS.setHours(initialTS.getHours() - Number(hours));
+      const { sensorId, hours } = req.query;
+      const initialTS = subHours(new Date(), Number(hours)); 
 
       const recentMoistures = await Moisture.find({
+        sensorId,
         timestamp: { $gte: initialTS },
       });
 
