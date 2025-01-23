@@ -3,13 +3,14 @@ import { Setting } from "../../resources/database/schemas/setting";
 
 class SettingController {
   async save(req: Request, res: Response) {
-    const { actionMode, hour, moistureThreshold } = req.body;
+    const { actionMode, lowerHour, upperHour, moistureThreshold } = req.body;
 
     try {
       const settings = await Setting.findOneAndCreateIfNotExists();
 
-      settings.actionMode = actionMode;
-      settings.hour = hour;
+      settings.actionMode = actionMode; // hour,moisture
+      settings.lowerHour = lowerHour;
+      settings.upperHour = upperHour;
       settings.moistureThreshold = moistureThreshold;
 
       await settings.save();

@@ -4,7 +4,8 @@ type ActionModesTypes = "hour" | "moisture";
 
 interface ISetting extends Document {
   actionMode: ActionModesTypes[];
-  hour: string;
+  lowerHour: string;
+  upperHour: string;
   moistureThreshold: number;
 }
 
@@ -20,7 +21,11 @@ const SettingSchema = new Schema<ISetting>(
         required: false,
       },
     ],
-    hour: {
+    lowerHour: {
+      type: String,
+      required: false,
+    },
+    upperHour: {
       type: String,
       required: false,
     },

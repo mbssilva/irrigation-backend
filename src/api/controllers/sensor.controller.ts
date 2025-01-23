@@ -62,9 +62,10 @@ class SensorController {
   
       if (settings.actionMode.includes('hour')) {
         const currentTime = new Date();
-        const targetTime = new Date(settings.hour);
+        const lowerHour = new Date(settings.lowerHour);
+        const upperHour = new Date(settings.upperHour);
   
-        if (currentTime < targetTime) {
+        if (currentTime > lowerHour && currentTime < upperHour) {
           allSensor.forEach(sensor => orders.push(sensor.id));
         }
       }
