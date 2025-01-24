@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import envs from "../../../common/envs";
+import { envs } from "../../../common/envs";
 
 const { mongoURI } = envs;
 

@@ -1,6 +1,6 @@
 import express from "express";
 import { routeControllers } from "../api/routes";
-import envs from "../common/envs";
+import { envs } from "../common/envs";
 import { resources } from "../resources";
 
 let shuttingDown = false;

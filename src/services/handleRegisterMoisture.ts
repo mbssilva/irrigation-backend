@@ -1,10 +1,13 @@
 import { Moisture } from "../resources/database/schemas/moisture";
 import { Sensor } from "../resources/database/schemas/sensor";
+import { moistureLevelRegression } from "../utils";
 
 type Input = {
   sensorId: string;
   moistureLevel: number;
 };
+
+
 
 export async function handleRegisterMoisture(data: Input): Promise<void> {
   try {
@@ -12,7 +15,7 @@ export async function handleRegisterMoisture(data: Input): Promise<void> {
     console.log(`handleRegisterMoisture :: sensorId: ${sensorId}, moistureLevel: ${moistureLevel}`);
     const sensor = await Sensor.findById(sensorId).catch(console.error);
 
-    const parsedMoistureLevel = 1.0966 * Math.exp((-10.02 * moistureLevel) / 4095);
+    const parsedMoistureLevel = moistureLevelRegression(Number(moistureLevel));
 
     if (!sensor) {
       console.error(`SensorId ${sensorId} não encontrado.`);
