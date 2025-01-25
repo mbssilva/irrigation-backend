@@ -1,7 +1,7 @@
 {
   "name": "irrigation-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web server app to TCC",
   "main": "index.js",
   "engines": {
     "node": "18"
@@ -12,7 +12,7 @@
     "dev": "tsnd --inspect --transpile-only --ignore-watch node_modules -r dotenv/config --respawn src/server/index.ts",
     "build": "tsup src"
   },
-  "keywords": [],
+  "keywords": ["irrigation", "automation", "mongoDB"],
   "author": "Matheus Bernardi da Silva",
   "license": "ISC",
   "devDependencies": {
