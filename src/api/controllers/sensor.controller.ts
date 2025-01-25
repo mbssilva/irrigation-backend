@@ -21,6 +21,17 @@ class SensorController {
       return res.status(400).send({ message: error.message });
     }
   }
+
+  async index(req: Request, res: Response) {
+    try {
+      const sensors = await Sensor.find();
+
+      return res.status(200).send(sensors);
+    } catch (error) {
+      console.error(error);
+      return res.status(400).send({ message: error.message });
+    }
+  }
 }
 
 export const sensorController = new SensorController();

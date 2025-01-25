@@ -15,6 +15,7 @@ export function routeControllers(app: Express): void {
   app.route("/moisture").get(moistureController.index);
 
   app.route("/sensor").post(sensorController.save);
+  app.route("/sensor").get(sensorController.index);
 
   app.route("/orders").get(orderController.index);
 
